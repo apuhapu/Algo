@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
@@ -7,19 +5,15 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		Queue<Integer> que = new LinkedList<>();
-		for (int i=1; i<n+1; i++) {
-			que.add(i);
-		}
-		boolean tic = false;
-		int a;
-		while (que.size()>1) {
-			a = que.poll();
-			if (tic) {
-				que.add(a);
+		if (n==1) {
+			System.out.println(1);
+		} else {
+			int m = 1;
+			while (m < n) {
+				m *= 2;
 			}
-			tic = !tic;
+			int l = n-m/2;
+			System.out.println(2*l);
 		}
-		System.out.println(que.poll());
 	}
 }
