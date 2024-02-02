@@ -12,8 +12,7 @@ public class Main {
 			while (m < n) {
 				m *= 2;
 			}
-			int l = n-m/2;
-			System.out.println(2*l);
+			System.out.println(2*n-m);
 		}
 	}
 }
