@@ -33,50 +33,47 @@ public class Main {
 	}
 
 	private static int cal4By4(int r, int c, int n, int m) {
-		PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 		int temp;
+		int max = 0;
 		if (n-r>3) {
 			temp = graph[r][c] + graph[r+1][c] + graph[r+2][c] + graph[r+3][c];
-			pq.add(temp);
+			max = Math.max(max, temp);
 		}
 		if (n-r>2 && m-c>1) {
 			temp = graph[r][c] + graph[r+1][c] + graph[r+2][c];
 			temp += Math.max(Math.max(graph[r][c+1], graph[r+1][c+1]), graph[r+2][c+1]);
-			pq.add(temp);
+			max = Math.max(max, temp);
 			
 			temp = graph[r][c+1] + graph[r+1][c+1] + graph[r+2][c+1];
 			temp += Math.max(Math.max(graph[r][c], graph[r+1][c]), graph[r+2][c]);
-			pq.add(temp);
+			max = Math.max(max, temp);
 			
             temp = graph[r][c] + graph[r+1][c] + graph[r+1][c+1] + graph[r+2][c+1];
-            pq.add(temp);
+            max = Math.max(max, temp);
             temp = graph[r][c+1] + graph[r+1][c+1] + graph[r+1][c] + graph[r+2][c];
-            pq.add(temp);
+            max = Math.max(max, temp);
 		}
 		if (n-r>1) {
 			if (m-c>2) {
 				temp = graph[r][c] + graph[r][c+1] + graph[r][c+2];
 				temp += Math.max(Math.max(graph[r+1][c], graph[r+1][c+1]), graph[r+1][c+2]);
-				pq.add(temp);
+				max = Math.max(max, temp);
 				
 				temp = graph[r+1][c] + graph[r+1][c+1] + graph[r+1][c+2];
 				temp += Math.max(Math.max(graph[r][c], graph[r][c+1]), graph[r][c+2]);
-				pq.add(temp);
+				max = Math.max(max, temp);
 				
-				pq.add(graph[r][c] + graph[r][c+1] + graph[r+1][c+1] + graph[r+1][c+2]);
-				pq.add(graph[r+1][c] + graph[r+1][c+1] + graph[r][c+1] + graph[r][c+2]);
+				max = Math.max(max, graph[r][c] + graph[r][c+1] + graph[r+1][c+1] + graph[r+1][c+2]);
+				max = Math.max(max, graph[r+1][c] + graph[r+1][c+1] + graph[r][c+1] + graph[r][c+2]);
 			}
 			if (m-c>1) {
-				pq.add(graph[r][c] + graph[r][c+1] + graph[r+1][c] + graph[r+1][c+1]);
+				max = Math.max(max, graph[r][c] + graph[r][c+1] + graph[r+1][c] + graph[r+1][c+1]);
 			}
 		}
 		if (n-r>0 && m-c>3) {
-			pq.add(graph[r][c] + graph[r][c+1] + graph[r][c+2] + graph[r][c+3]);
+			max = Math.max(max, graph[r][c] + graph[r][c+1] + graph[r][c+2] + graph[r][c+3]);
 		}
 		
-		if (pq.isEmpty()) {
-			return 0;
-		}
-		return pq.poll();
+		return max;
 	}
 }
