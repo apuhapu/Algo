@@ -2,13 +2,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
 	
 	static int n, currIdx = 1;
-	static int[] colIdx;
 	static ArrayList<ArrayList<Integer>> hs = new ArrayList<>();
 	static Node[] nodes;
 	
@@ -40,7 +38,6 @@ public class Main {
 		}
 		
 		hs.add(new ArrayList<>()); // 0번 기본 추가
-		colIdx = new int[n+1];
 		sortCol(root,1);
 		int findLevel = 1;
 		int maxD = 1;
@@ -48,22 +45,13 @@ public class Main {
 			ArrayList<Integer> sameLevelNodes = hs.get(level);
 			int frontIdx = sameLevelNodes.get(0);
 			int backIdx = sameLevelNodes.get(sameLevelNodes.size()-1);
-			int currD = findCol(backIdx) - findCol(frontIdx) + 1;
+			int currD = nodes[backIdx].col - nodes[frontIdx].col + 1;
 			if (maxD<currD) {
 				findLevel = level;
 				maxD = currD;
 			}
 		}
 		System.out.println(findLevel + " " + maxD);
-	}
-	
-	private static int findCol(int idx) {
-		for (int i=1; i<n+1; i++) {
-			if (colIdx[i] == idx) {
-				return i;
-			}
-		}
-		return -1;
 	}
 	
 	private static void sortCol(int nodeIdx, int h) {
@@ -75,7 +63,7 @@ public class Main {
 		if (curr.left!=-1) {
 			sortCol(curr.left,h+1);
 		}
-		colIdx[currIdx++] = nodeIdx;
+		curr.col = currIdx++;
 		if (curr.right!=-1) {
 			sortCol(curr.right,h+1);
 		}
@@ -84,6 +72,7 @@ public class Main {
 	static class Node {
 		int left;
 		int right;
+		int col;
 		public Node(int left, int right) {
 			this.left = left;
 			this.right = right;
