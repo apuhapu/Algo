@@ -6,3 +6,4 @@ where TOTAL_ORDER>3000 and FLAVOR in (
     from ICECREAM_INFO
     where INGREDIENT_TYPE = "fruit_based"
 )
+order by TOTAL_ORDER desc
