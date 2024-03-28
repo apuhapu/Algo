@@ -36,12 +36,11 @@ public class Solution {
 					if (k==s) {
 						continue;
 					}
-					for (int e=s+1; e<n; e++) {
+					for (int e=0; e<n; e++) {
 						if (k==e || s==e) {
 							continue;
 						}
 						graph[s][e] = Math.min(graph[s][e], graph[s][k]+graph[k][e]);
-						graph[e][s] = graph[s][e];
 					}
 				}
 			}
